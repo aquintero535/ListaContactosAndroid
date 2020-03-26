@@ -43,10 +43,9 @@ public class CrearContacto extends AppCompatActivity {
     public void guardar(View view){
         String nombre = et_nombre.getText().toString();
         String telefono = et_telefono.getText().toString();
-
+        Contacto contacto = new Contacto(nombre, telefono);
+        ListaContactos.aniadirContacto(contacto);
         Intent intent2 = new Intent(view.getContext(), MainActivity.class);
-        intent2.putExtra("Nombre", nombre);
-        intent2.putExtra("Telefono", telefono);
         startActivityForResult(intent2, 0);
         Toast.makeText(this, "El contacto ha sido guardado.", Toast.LENGTH_SHORT).show();
     }
