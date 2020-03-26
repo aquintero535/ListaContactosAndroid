@@ -1,7 +1,6 @@
 package com.example.listadecontactos;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Contacto extends HashMap<String, String> {
 
