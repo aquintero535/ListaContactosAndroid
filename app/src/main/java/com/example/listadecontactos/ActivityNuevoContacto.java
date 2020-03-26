@@ -31,7 +31,6 @@ public class ActivityNuevoContacto extends AppCompatActivity {
                 regresar(v);
             }
         });
-
     }
 
     //Crea un nuevo objeto Contacto (Hashmap) y lo guarda en el ArrayList de ListaContactos.
@@ -43,20 +42,12 @@ public class ActivityNuevoContacto extends AppCompatActivity {
             Toast.makeText(this, "Los campos no pueden estar vacíos.", Toast.LENGTH_LONG).show();
             return;
         }
-        Contacto contacto = new Contacto(nombre, telefono);
-        ListaContactos.aniadirContacto(contacto);
-        /*
-        //Crea un intent para regresar al ActivityPrincipal
-        Intent intent2 = new Intent(view.getContext(), MainActivity.class);
-        startActivityForResult(intent2, 0);*/
-
-        this.finish();
+        ListaContactos.aniadirContacto(new Contacto(nombre, telefono));
         Toast.makeText(this, "El contacto ha sido guardado.", Toast.LENGTH_SHORT).show();
+        this.finish();
     }
 
     public void regresar(View view){
-        /*Intent intent3 = new Intent(view.getContext(), MainActivity.class);
-        startActivityForResult(intent3, 0);*/
         this.finish();
     }
 }

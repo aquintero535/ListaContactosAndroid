@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         aviso = (TextView)findViewById(R.id.avisoNoHayContactos);
         listaContactos = (ListView)findViewById(R.id.listview);
+
         //Botón para ingresar al segundo Activity (añadir nuevo contacto).
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
