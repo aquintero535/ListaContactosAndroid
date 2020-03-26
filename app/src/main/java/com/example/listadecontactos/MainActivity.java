@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView listaContactos;
+    private TextView aviso;
+    private SimpleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,25 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView aviso = (TextView)findViewById(R.id.avisoNoHayContactos);
+        aviso = (TextView)findViewById(R.id.avisoNoHayContactos);
         listaContactos = (ListView)findViewById(R.id.listview);
-
-        //Si la lista de contactos no está vacía, elimina el TextView "No ha añadido ningun contacto"
-        if (!ListaContactos.getListaContactos().isEmpty()){
-            aviso.setVisibility(View.GONE);
-        }
-
-        //Adaptador del ArrayList para el ListView.
-        SimpleAdapter adapter = new SimpleAdapter(this,
-                (ArrayList<Contacto>)ListaContactos.getListaContactos(),
-                R.layout.list_items,
-                new String[]{"Primera linea", "Segunda linea"},
-                new int[]{R.id.text1, R.id.text2}
-                );
-
-        //Se añade el adaptador al ListView.
-        listaContactos.setAdapter(adapter);
-
         //Botón para ingresar al segundo Activity (añadir nuevo contacto).
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +38,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+
+        cargarListaDeContactos();
+    }
+
+    //Recarga la lista de contactos.
+    protected void onResume(){
+        super.onResume();
+        cargarListaDeContactos();
+    }
+
+    private void cargarListaDeContactos(){
+        //Si la lista de contactos no está vacía, elimina el TextView "No ha añadido ningun contacto"
+        if (!ListaContactos.getListaContactos().isEmpty()){
+            this.aviso.setVisibility(View.GONE);
+        }
+
+        //Adaptador del ArrayList para el ListView.
+        adapter = new SimpleAdapter(this,
+                (ArrayList<Contacto>)ListaContactos.getListaContactos(),
+                R.layout.list_items,
+                new String[]{"Primera linea", "Segunda linea"},
+                new int[]{R.id.text1, R.id.text2}
+        );
+
+        //Se añade el adaptador al ListView.
+        listaContactos.setAdapter(adapter);
     }
 
     @Override
@@ -75,4 +87,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
