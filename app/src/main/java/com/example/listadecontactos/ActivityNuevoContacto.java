@@ -35,20 +35,28 @@ public class ActivityNuevoContacto extends AppCompatActivity {
     }
 
     //Crea un nuevo objeto Contacto (Hashmap) y lo guarda en el ArrayList de ListaContactos.
+    //después, finaliza el Activity.
     public void guardar(View view){
         String nombre = et_nombre.getText().toString();
         String telefono = et_telefono.getText().toString();
+        if (nombre.isEmpty() || telefono.isEmpty()){
+            Toast.makeText(this, "Los campos no pueden estar vacíos.", Toast.LENGTH_LONG).show();
+            return;
+        }
         Contacto contacto = new Contacto(nombre, telefono);
         ListaContactos.aniadirContacto(contacto);
-
+        /*
         //Crea un intent para regresar al ActivityPrincipal
         Intent intent2 = new Intent(view.getContext(), MainActivity.class);
-        startActivityForResult(intent2, 0);
+        startActivityForResult(intent2, 0);*/
+
+        this.finish();
         Toast.makeText(this, "El contacto ha sido guardado.", Toast.LENGTH_SHORT).show();
     }
 
     public void regresar(View view){
-        Intent intent3 = new Intent(view.getContext(), MainActivity.class);
-        startActivityForResult(intent3, 0);
+        /*Intent intent3 = new Intent(view.getContext(), MainActivity.class);
+        startActivityForResult(intent3, 0);*/
+        this.finish();
     }
 }
