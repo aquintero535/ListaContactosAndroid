@@ -10,20 +10,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView listaContactos;
-    private HashMap<String, String> contactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,30 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
-
         listaContactos = (ListView)findViewById(R.id.listview);
 
-        Contacto con1 = new Contacto("Adrian", "6849-5334");
-        Contacto con2 = new Contacto("Fulanito", "68739-376");
-
-        List<Contacto> lista = new ArrayList<>();
-
-        lista.add(con1);
-        lista.add(con2);
-        try{
-            String nombre = getIntent().getStringExtra("Nombre");
-            String telefono = getIntent().getStringExtra("Telefono");
-            Contacto con3 = new Contacto(nombre, telefono);
-            lista.add(con3);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        };
-
-
-        HashMap<String, String> mapasLista = new HashMap<>();
-
         SimpleAdapter adapter = new SimpleAdapter(this,
-                lista,
+                (ArrayList<Contacto>)ListaContactos.getListaContactos(),
                 R.layout.list_items,
                 new String[]{"Primera linea", "Segunda linea"},
                 new int[]{R.id.text1, R.id.text2}

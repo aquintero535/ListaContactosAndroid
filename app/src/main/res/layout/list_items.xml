@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/text1"
         android:layout_width="413dp"
-        android:layout_height="69dp"
+        android:layout_height="47dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="21sp"
         android:textStyle="bold"
@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/text2"
-        android:layout_width="415dp"
-        android:layout_height="52dp"
+        android:layout_width="408dp"
+        android:layout_height="42dp"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
