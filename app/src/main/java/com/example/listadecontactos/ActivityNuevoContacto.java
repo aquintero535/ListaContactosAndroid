@@ -16,19 +16,16 @@ public class ActivityNuevoContacto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_contacto);
-
         et_nombre = (EditText)findViewById(R.id.txt_nombre);
         et_telefono = (EditText)findViewById(R.id.txt_telefono);
         Button botonGuardar = (Button)findViewById(R.id.button);
         Button botonRegresar = (Button)findViewById(R.id.button2);
-
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 guardar(v);
             }
         });
-
         botonRegresar.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 regresar(v);
@@ -37,11 +34,14 @@ public class ActivityNuevoContacto extends AppCompatActivity {
 
     }
 
+    //Crea un nuevo objeto Contacto (Hashmap) y lo guarda en el ArrayList de ListaContactos.
     public void guardar(View view){
         String nombre = et_nombre.getText().toString();
         String telefono = et_telefono.getText().toString();
         Contacto contacto = new Contacto(nombre, telefono);
         ListaContactos.aniadirContacto(contacto);
+
+        //Crea un intent para regresar al ActivityPrincipal
         Intent intent2 = new Intent(view.getContext(), MainActivity.class);
         startActivityForResult(intent2, 0);
         Toast.makeText(this, "El contacto ha sido guardado.", Toast.LENGTH_SHORT).show();

@@ -6,5 +6,7 @@
     <string name="txt_telefono">Teléfono del contacto</string>
     <string name="botonGuardar">Guardar</string>
     <string name="botonRegresar">Regresar</string>
+    <string name="txtAvisoNoContactos">No hay contactos en la lista</string>
+    <string name="txtNuevoContacto">Nuevo contacto</string>
 
 </resources>

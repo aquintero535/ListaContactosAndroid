@@ -3,6 +3,7 @@ package com.example.listadecontactos;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase que guarda el ArrayList de los contactos entre las dos Activities.
 public class ListaContactos {
 
     private static List<Contacto> listaContactos = new ArrayList<>();;
