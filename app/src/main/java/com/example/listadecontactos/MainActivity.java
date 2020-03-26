@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CrearContacto.class);
+                Intent intent = new Intent(view.getContext(), ActivityNuevoContacto.class);
                 startActivityForResult(intent, 0);
             }
         });

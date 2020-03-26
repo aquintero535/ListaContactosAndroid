@@ -8,14 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CrearContacto extends AppCompatActivity {
+public class ActivityNuevoContacto extends AppCompatActivity {
 
     private EditText et_nombre, et_telefono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crear_contacto);
+        setContentView(R.layout.activity_nuevo_contacto);
 
         et_nombre = (EditText)findViewById(R.id.txt_nombre);
         et_telefono = (EditText)findViewById(R.id.txt_telefono);
