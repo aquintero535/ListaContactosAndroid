@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -30,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
         aviso = (TextView)findViewById(R.id.avisoNoHayContactos);
         listaContactos = (ListView)findViewById(R.id.listview);
 
+        //Al tocar un contacto, se abre una pantalla para mostrar los detalles del contacto.
+        listaContactos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Obtiene el objeto Contacto escogido.
+                Contacto contacto = (Contacto) parent.getAdapter().getItem(position);
+                Intent detallesContacto = new Intent (view.getContext(),
+                        ActivityDetallesContacto.class);
+
+                //Envía los datos a la otra pantalla y la muestra.
+                detallesContacto.putExtra("Nombre", contacto.getNombre());
+                detallesContacto.putExtra("Telefono", contacto.getTelefono());
+                startActivity(detallesContacto);
+            }
+        });
+
         //Botón para ingresar al segundo Activity (añadir nuevo contacto).
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cargarListaDeContactos(){
-        //Si la lista de contactos no está vacía, elimina el TextView "No ha añadido ningun contacto"
+        //Si la lista de contactos no está vacía, elimina el TextView "No hay contactos en la lista."
         if (!ListaContactos.getListaContactos().isEmpty()){
             this.aviso.setVisibility(View.GONE);
         }
 
         //Adaptador del ArrayList para el ListView.
         adapter = new SimpleAdapter(this,
-                (ArrayList<Contacto>)ListaContactos.getListaContactos(),
+                ListaContactos.getListaContactos(),
                 R.layout.list_items,
                 new String[]{"Primera linea", "Segunda linea"},
                 new int[]{R.id.text1, R.id.text2}
