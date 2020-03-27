@@ -1,10 +1,13 @@
 package com.example.listadecontactos;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Vibrator;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +46,22 @@ public class MainActivity extends AppCompatActivity {
                 //Envía los datos a la otra pantalla y la muestra.
                 detallesContacto.putExtra("Nombre", contacto.getNombre());
                 detallesContacto.putExtra("Telefono", contacto.getTelefono());
+                detallesContacto.putExtra("Correo", contacto.getCorreo());
                 startActivity(detallesContacto);
+            }
+        });
+
+        //Al mantener presionado un contacto, se elimina y se recarga la lista de contactos.
+        listaContactos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ListaContactos.getListaContactos().remove(position);
+                //Vibra al eliminar un contacto.
+                Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vibe.vibrate(100);
+                cargarListaDeContactos();
+                Toast.makeText(MainActivity.this, "Contacto eliminado", Toast.LENGTH_LONG).show();
+                return false;
             }
         });
 
@@ -67,8 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cargarListaDeContactos(){
-        //Si la lista de contactos no está vacía, elimina el TextView "No hay contactos en la lista."
-        if (!ListaContactos.getListaContactos().isEmpty()){
+        //Si la lista de contactos está vacía, muestra el TextView "No hay contactos en la lista."
+        if (ListaContactos.getListaContactos().isEmpty()){
+            this.aviso.setVisibility(View.VISIBLE);
+        } else {
             this.aviso.setVisibility(View.GONE);
         }
 

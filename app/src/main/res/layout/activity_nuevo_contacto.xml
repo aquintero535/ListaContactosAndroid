@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/txt_nombre"
+        android:id="@+id/campoNombre"
         android:layout_width="271dp"
-        android:layout_height="49dp"
+        android:layout_height="45dp"
         android:layout_marginTop="56dp"
         android:ems="10"
-        android:hint="@string/txt_nombre"
+        android:hint="@string/campoNombreHint"
         android:inputType="textPersonName"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,26 +20,39 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/txt_telefono"
+        android:id="@+id/campoTelefono"
         android:layout_width="271dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="36dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="@string/txt_telefono"
+        android:hint="@string/campoTelefonoHint"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nombre" />
+        app:layout_constraintTop_toBottomOf="@+id/campoNombre" />
+
+    <EditText
+        android:id="@+id/campoCorreo"
+        android:layout_width="271dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/campoCorreoHint"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoTelefono" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="121dp"
         android:layout_height="49dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="444dp"
         android:text="@string/botonGuardar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.688"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,23 +60,24 @@
         android:id="@+id/button2"
         android:layout_width="121dp"
         android:layout_height="49dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="444dp"
         android:text="@string/botonRegresar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.734"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="270dp"
+        android:layout_width="271dp"
         android:layout_height="44dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="80dp"
         android:text="@string/txtNuevoContacto"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,12 @@ public class Contacto extends HashMap<String, String> {
 
     private String nombre;
     private String telefono;
+    private String correo;
 
-    public Contacto(String nombre, String telefono) {
+    public Contacto(String nombre, String telefono, String correo) {
         this.nombre = nombre;
         this.telefono = telefono;
+        this.correo = correo;
         this.put("Primera linea", nombre); //La primera línea que corresponde al nombre
         this.put("Segunda linea", telefono); //La segunda línea que corresponde al num. de teléfono
     }
@@ -23,4 +25,6 @@ public class Contacto extends HashMap<String, String> {
     public String getTelefono() {
         return telefono;
     }
+
+    public String getCorreo() { return correo; }
 }

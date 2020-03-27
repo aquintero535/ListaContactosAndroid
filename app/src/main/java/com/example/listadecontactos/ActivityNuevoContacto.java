@@ -1,7 +1,7 @@
 package com.example.listadecontactos;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +10,15 @@ import android.widget.Toast;
 
 public class ActivityNuevoContacto extends AppCompatActivity {
 
-    private EditText et_nombre, et_telefono;
+    private EditText et_nombre, et_telefono, et_Correo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_contacto);
-        et_nombre = (EditText)findViewById(R.id.txt_nombre);
-        et_telefono = (EditText)findViewById(R.id.txt_telefono);
+        et_nombre = (EditText)findViewById(R.id.campoNombre);
+        et_telefono = (EditText)findViewById(R.id.campoTelefono);
+        et_Correo = (EditText)findViewById(R.id.campoCorreo);
         Button botonGuardar = (Button)findViewById(R.id.button);
         Button botonRegresar = (Button)findViewById(R.id.button2);
         botonGuardar.setOnClickListener(new View.OnClickListener() {
@@ -38,11 +39,12 @@ public class ActivityNuevoContacto extends AppCompatActivity {
     public void guardar(View view){
         String nombre = et_nombre.getText().toString();
         String telefono = et_telefono.getText().toString();
+        String correo = et_Correo.getText().toString();
         if (nombre.isEmpty() || telefono.isEmpty()){
-            Toast.makeText(this, "Los campos no pueden estar vacíos.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Los campos de nombre y número de teléfono no pueden estar vacíos.", Toast.LENGTH_LONG).show();
             return;
         }
-        ListaContactos.aniadirContacto(new Contacto(nombre, telefono));
+        ListaContactos.aniadirContacto(new Contacto(nombre, telefono, correo));
         Toast.makeText(this, "El contacto ha sido guardado.", Toast.LENGTH_SHORT).show();
         this.finish();
     }

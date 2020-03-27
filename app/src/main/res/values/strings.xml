@@ -2,11 +2,13 @@
     <string name="app_name">Lista de contactos</string>
     <string name="action_settings">Opciones</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="txt_nombre">Nombre del contacto</string>
-    <string name="txt_telefono">Teléfono del contacto</string>
+    <string name="campoNombreHint">Nombre y apellido</string>
+    <string name="campoTelefonoHint">Número de teléfono</string>
+    <string name="campoCorreoHint">Correo</string>
     <string name="botonGuardar">Guardar</string>
     <string name="botonRegresar">Regresar</string>
     <string name="txtAvisoNoContactos">No hay contactos en la lista</string>
     <string name="txtNuevoContacto">Nuevo contacto</string>
+
 
 </resources>
