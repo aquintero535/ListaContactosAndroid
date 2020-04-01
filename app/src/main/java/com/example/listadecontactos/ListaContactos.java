@@ -19,4 +19,8 @@ public class ListaContactos {
         return listaContactos;
     }
 
+    public static void setListaContactos(List<Contacto> lista){
+        listaContactos = lista;
+    }
+
 }

@@ -27,4 +27,16 @@ public class Contacto extends HashMap<String, String> {
     }
 
     public String getCorreo() { return correo; }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 }

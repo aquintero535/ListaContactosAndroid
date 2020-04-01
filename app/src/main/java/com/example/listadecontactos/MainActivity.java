@@ -3,7 +3,15 @@ package com.example.listadecontactos;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listaContactos;
     private TextView aviso;
     private SimpleAdapter adapter;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         aviso = (TextView)findViewById(R.id.avisoNoHayContactos);
         listaContactos = (ListView)findViewById(R.id.listview);
-
+        ListaContactos.setListaContactos(new ArrayList<Contacto>());
+        db = FirebaseFirestore.getInstance();
+        leerBaseDeDatos();
         //Al tocar un contacto, se abre una pantalla para mostrar los detalles del contacto.
         listaContactos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,19 +85,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
-
-        cargarListaDeContactos();
     }
 
     //Recarga la lista de contactos.
     protected void onResume(){
         super.onResume();
+        leerBaseDeDatos();
         cargarListaDeContactos();
     }
 
     private void cargarListaDeContactos(){
         //Si la lista de contactos está vacía, muestra el TextView "No hay contactos en la lista."
-        if (ListaContactos.getListaContactos().isEmpty()){
+        if (ListaContactos.getListaContactos().isEmpty()) {
             this.aviso.setVisibility(View.VISIBLE);
         } else {
             this.aviso.setVisibility(View.GONE);
@@ -102,6 +112,28 @@ public class MainActivity extends AppCompatActivity {
 
         //Se añade el adaptador al ListView.
         listaContactos.setAdapter(adapter);
+    }
+
+    private void leerBaseDeDatos(){
+        ListaContactos.setListaContactos(new ArrayList<Contacto>());
+        db.collection("contactos")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot document: task.getResult()){
+                                Contacto contacto = new Contacto(
+                                        document.getData().get("nombre").toString(),
+                                        document.getData().get("telefono").toString(),
+                                        document.getData().get("correo").toString()
+                                );
+                                ListaContactos.aniadirContacto(contacto);
+                            }
+                            cargarListaDeContactos();
+                        }
+                    }
+                });
     }
 
     @Override
